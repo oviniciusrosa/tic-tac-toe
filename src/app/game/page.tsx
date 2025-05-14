@@ -1,13 +1,23 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { GameBoard } from "@/components/game-board";
 import { Logo } from "@/components/logo";
 import { TurnIndicator } from "@/components/turn-indicator";
 import { Animation } from "@/components/animations";
 import { RestartGameButton } from "@/components/restart-game-button";
+import { GameStats } from "@/components/game-stats";
+import { useGameStore } from "@/store/game.store";
+import { useRouter } from "next/navigation";
 
 export default function GamePage() {
+  const game = useGameStore();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (game.gameMode === null) router.push("/");
+  }, [game.gameMode]);
+
   return (
     <section>
       <Animation.SlideUpEntrance>
@@ -19,6 +29,7 @@ export default function GamePage() {
       </Animation.SlideUpEntrance>
 
       <GameBoard />
+      <GameStats />
     </section>
   );
 }

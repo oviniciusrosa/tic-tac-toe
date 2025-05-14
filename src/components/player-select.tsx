@@ -3,9 +3,10 @@
 import React from "react";
 import { Player } from "@/enums/player";
 import { PlayerSelectButton } from "./player-select-button";
+import { useGameStore } from "@/store/game.store";
 
 export function PlayerSelect() {
-  const [selectedPlayer, setSelectedPlayer] = React.useState<Player>(Player.X);
+  const game = useGameStore();
   const ref = React.useRef<HTMLDivElement>(null);
 
   function toggleSelectedPlayer() {
@@ -13,11 +14,7 @@ export function PlayerSelect() {
 
     ref.current.classList.toggle("left-[calc(50%-8px)]");
 
-    setSelectedPlayer((prevPlayer) => {
-      if (prevPlayer === Player.X) return Player.O;
-
-      return Player.X;
-    });
+    game.setMainPlayer(game.mainPlayer === Player.X ? Player.O : Player.X);
   }
 
   return (
@@ -32,12 +29,12 @@ export function PlayerSelect() {
         onClick={toggleSelectedPlayer}
       >
         <PlayerSelectButton
-          isSelected={selectedPlayer === Player.X}
+          isSelected={game.mainPlayer === Player.X}
           value={Player.X}
         />
 
         <PlayerSelectButton
-          isSelected={selectedPlayer === Player.O}
+          isSelected={game.mainPlayer === Player.O}
           value={Player.O}
         />
 

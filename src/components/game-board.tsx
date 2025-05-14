@@ -9,6 +9,8 @@ export function GameBoard() {
   const game = useGameStore();
 
   function handleUserMove(index: number) {
+    if (game.board[index] !== null) return;
+
     game.move(game.turn, index);
   }
 

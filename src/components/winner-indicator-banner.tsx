@@ -6,15 +6,18 @@ import { motion } from "motion/react";
 import IconX from "./icons/icon-x";
 import IconO from "./icons/icon-o";
 import { cn } from "@/lib/utils";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { Button } from "./button";
 import { Animation } from "./animations";
 import { useRouter } from "next/navigation";
+import { useWinHistory } from "@/store/win-history.store";
 
 const DEFAULT_DELAY = 0.2;
 
 export function WinnerIndicatorBanner() {
   const game = useGameStore();
+  const history = useWinHistory();
+
   const router = useRouter();
 
   function closeGame() {
@@ -23,8 +26,14 @@ export function WinnerIndicatorBanner() {
   }
 
   function nextGame() {
-    game.restart();
+    if (game.gameMode) game.restart(game.gameMode);
   }
+
+  useEffect(() => {
+    if (game.isGameOver && game.winner && game.gameMode) {
+      history.upadteWinCount(game.winner, game.gameMode);
+    }
+  }, [game.isGameOver, game.winner, game.gameMode]);
 
   if (!game.isGameOver) return <></>;
 
