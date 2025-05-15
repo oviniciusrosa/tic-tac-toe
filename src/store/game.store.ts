@@ -2,7 +2,6 @@ import { WinCondition } from "@/entities/win-condition";
 import { GameMode } from "@/enums/game-mode";
 import { Player } from "@/enums/player";
 import { create } from "zustand";
-import { useWinHistory } from "./win-history.store";
 
 export type GameBoard = (Player | null)[];
 

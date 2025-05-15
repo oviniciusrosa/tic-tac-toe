@@ -1,7 +1,6 @@
 import { GameMode } from "@/enums/game-mode";
 import { Player } from "@/enums/player";
 import { create } from "zustand";
-import { useGameStore } from "./game.store";
 import { persist } from "zustand/middleware";
 
 export type GameBoard = (Player | null)[];

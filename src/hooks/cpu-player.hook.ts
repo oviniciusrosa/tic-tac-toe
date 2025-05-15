@@ -1,6 +1,6 @@
 import { GameMode } from "@/enums/game-mode";
 import { useGameStore } from "@/store/game.store";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useCpuPlayer() {
   const game = useGameStore();
