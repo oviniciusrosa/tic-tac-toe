@@ -18,7 +18,7 @@ type GameStore = {
   setMainPlayer: (player: ValidPlayer) => void;
   setGameMode: (gameMode: GameMode) => void;
   move: (player: Player, index: number) => void;
-  restart: (currentGameMode?: GameMode) => void;
+  restart: (currentGameMode?: GameMode, mainPlayer?: ValidPlayer) => void;
 };
 
 function updateMove(board: GameBoard, turn: Player, index: number) {
@@ -58,9 +58,9 @@ export const useGameStore = create<GameStore>()((set) => {
         };
       });
     },
-    restart: (currentGameMode?: GameMode) => {
+    restart: (currentGameMode?: GameMode, mainPlayer?: ValidPlayer) => {
       set({
-        mainPlayer: Player.X,
+        mainPlayer: mainPlayer ?? Player.X,
         gameMode: currentGameMode ?? GameMode.VSComputer,
         board: Array(9).fill(null),
         turn: Player.X,

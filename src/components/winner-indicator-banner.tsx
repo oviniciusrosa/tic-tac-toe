@@ -11,6 +11,7 @@ import { Button } from "./button";
 import { Animation } from "./animations";
 import { useRouter } from "next/navigation";
 import { useWinHistory } from "@/store/win-history.store";
+import { GameMode } from "@/enums/game-mode";
 
 const DEFAULT_DELAY = 0.2;
 
@@ -26,7 +27,7 @@ export function WinnerIndicatorBanner() {
   }
 
   function nextGame() {
-    if (game.gameMode) game.restart(game.gameMode);
+    if (game.gameMode) game.restart(game.gameMode, game.mainPlayer);
   }
 
   useEffect(() => {
@@ -98,19 +99,36 @@ function WinnerIndicatorTitle() {
     };
   }, [game.winner]);
 
+  const winnerText = useMemo(() => {
+    if (game.gameMode === GameMode.VSHuman) {
+      if (game.winner === Player.X) return "Player 1 ganhou!";
+
+      return "Player 2 ganhou!";
+    }
+
+    return game.winner === game.mainPlayer
+      ? "Você ganhou!"
+      : "Ah não, você perdeu...";
+  }, [game.winner]);
+
   return (
-    <div className="flex items-center justify-center gap-4 w-full">
-      {game.winner !== Player.None && (
-        <PlayerIcon
-          className={cn(
-            "h-12 w-12",
-            game.winner === Player.X ? "fill-primary" : "fill-secondary"
-          )}
-        />
-      )}
-      <h1 className={cn("text-4xl font-bold uppercase", textColor)}>
-        {message}
-      </h1>
-    </div>
+    <>
+      <h2 className="flex items-center justify-center text-neutral-silver-dark mb-4">
+        {winnerText}
+      </h2>
+      <div className="flex items-center justify-center gap-4 w-full">
+        {game.winner !== Player.None && (
+          <PlayerIcon
+            className={cn(
+              "h-12 w-12",
+              game.winner === Player.X ? "fill-primary" : "fill-secondary"
+            )}
+          />
+        )}
+        <h1 className={cn("text-4xl font-bold uppercase", textColor)}>
+          {message}
+        </h1>
+      </div>
+    </>
   );
 }

@@ -51,6 +51,18 @@ export default function NewGamePage() {
           </Link>
         </Animation.Entrance>
       </div>
+
+      <footer className="absolute bottom-[20px] left-0 w-full flex items-center justify-center">
+        <p className="text-neutral-silver-dark text-xs">
+          Desenvolvido com {"<3"} por{" "}
+          <a
+            href="https://github.com/oviniciusrosa"
+            className="text-primary hover:text-shadow-primary-600 transition-colors"
+          >
+            Vinicius Rosa
+          </a>
+        </p>
+      </footer>
     </>
   );
 }

@@ -4,12 +4,15 @@ import React from "react";
 import { Tile } from "@/components/tile";
 import { useGameStore } from "@/store/game.store";
 import { Animation } from "@/components/animations";
+import { useCpuPlayer } from "@/hooks/cpu-player.hook";
 
 export function GameBoard() {
   const game = useGameStore();
 
+  const isCpuMoving = useCpuPlayer();
+
   function handleUserMove(index: number) {
-    if (game.board[index] !== null) return;
+    if (game.board[index] !== null || isCpuMoving) return;
 
     game.move(game.turn, index);
   }
