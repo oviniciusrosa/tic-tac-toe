@@ -43,11 +43,6 @@ export const useWinHistory = create<WinHistoryStore>()(
         }));
       },
     }),
-    {
-      name: "@tic-tac-toe-win-history",
-      onRehydrateStorage: () => {
-        console.log("cuuuu");
-      },
-    }
+    { name: "@tic-tac-toe-win-history" }
   )
 );
