@@ -29,7 +29,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <WinnerIndicatorBanner />
-        <div className="flex flex-col mx-auto items-center justify-center h-screen w-md gap-6">
+        <div className="flex flex-col mx-auto items-center justify-center h-screen w-md gap-6 max-[448px]:px-4 max-[448px]:w-screen">
           {children}
         </div>
       </body>

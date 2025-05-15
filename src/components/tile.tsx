@@ -43,7 +43,7 @@ export function Tile({ boardPosition, value, onChange }: Props) {
       <button
         type="button"
         className={cn(
-          "flex items-center justify-center h-36 w-36 bg-neutral-sm-dark-navy rounded-xl border-b-6 border-neutral cursor-pointer",
+          "flex items-center justify-center h-36 w-36 max-[448px]:max-h-[calc(100vw-71vw)] max-[448px]:max-w-[calc(100vw-71vw)] bg-neutral-sm-dark-navy rounded-xl border-b-6 border-neutral cursor-pointer",
           winnerBg
         )}
         onClick={onChange}
